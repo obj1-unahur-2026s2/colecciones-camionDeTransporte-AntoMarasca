@@ -1,9 +1,37 @@
+import cosas.*
 import camion.*
 
-describe "group of test for camion" {
+/*
+  Por otro lado, armar un test del camión, cargado con lo siguiente: bumblebee 
+  como robot, la arena a granel con 150 kilos, la batería antiaérea con los misiles 
+  puestos, y el embalaje de seguridad poniéndole como contenido el paquete de 
+  ladrillos con 80 ladrillos. Para cada método, calcular qué resultado tiene que 
+  dar, y hacer el test correspondiente.
+*/
+describe "Test de Camion" {
 
-  test "first test" {
-    assert.that(true)
+  test "Test de contenido" {
+    bumblebee.tranformadoEnRobot() //peso 800, peligrosidad 30
+    arenaAGranel.cambiarPeso(150) //peso 150, peligrosidad 1
+    bateriaAntiaerea.cargarMisiles() // peso 300, peligrosidad 100
+    paqueteDeLadrillos.cantidadDeLadrillos(80)
+    embalajeDeSeguridad.cambiarObjetoEmbalado(paqueteDeLadrillos) // peso 160, peligrosidad 2
+
+    camion.cargarCosas(bumblebee)
+    camion.cargarCosas(arenaAGranel)
+    camion.cargarCosas(bateriaAntiaerea)
+    camion.cargarCosas(embalajeDeSeguridad)
+    
+    assert.equals(2410, camion.pesoTotal())
+    assert.that(camion.todosLosPesosSonPares())
+    assert.that(camion.cosaPesaLoMismo(150))
+    assert.equals(bumblebee, camion.primerCosaCargadaConPeligrosidad(30))
+    assert.equals([bateriaAntiaerea], camion.cosasQueSuperanNivelDePeligrosidad(40))
+    assert.equals([bumblebee, bateriaAntiaerea], camion.cosasQueSuperanNivelDeCosa(paqueteDeLadrillos))
+    assert.notThat(camion.pesoEsMayorAlPermitido())
+    assert.that(camion.puedeCircularEnRuta(900))
+    assert.that(camion.tieneAlgoQuePesaEntreUnMinimoYUnMaximo(250, 500))
+    assert.equals(bumblebee, camion.cosaMasPesadaQueHay()) //Revisar porque no funciona
   }
 
 }

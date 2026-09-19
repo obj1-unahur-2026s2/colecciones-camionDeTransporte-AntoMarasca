@@ -1,9 +1,37 @@
 import cosas.*
 
-describe "group of test for cosas" {
+/*
+  Hay que hacer un pequeño test para cada una de las siguientes cosas: 
+  paquete de ladrillos, batería antiaérea, contenedor portuario y embalaje de 
+  seguridad. Al embalaje ponerle adentro los residuos radioactivos con 30 kg de 
+  peso. Al contenedor, dos o tres cosas a elección.
+*/
+describe "Test de Cosas" {
 
-  test "first test" {
-    assert.that(true)
+  test "Paquete de ladrillos" {
+    paqueteDeLadrillos.cantidadDeLadrillos(10)
+    assert.equals(20, paqueteDeLadrillos.peso())
+    assert.equals(2, paqueteDeLadrillos.peligrosidad())
   }
 
+  test "Bateria antiaerea" {
+    bateriaAntiaerea.cargarMisiles()
+    assert.equals(300, bateriaAntiaerea.peso())
+    assert.equals(100, bateriaAntiaerea.peligrosidad())
+  }
+
+  test "Contenedor portuario" {
+    contenedorPortuario.cargarCosas(knightRider)
+    contenedorPortuario.cargarCosas(arenaAGranel)
+    contenedorPortuario.cargarCosas(residuosRadioactivos)
+    assert.equals(620, contenedorPortuario.peso())
+    assert.equals(200, contenedorPortuario.peligrosidad())
+  }
+
+  test "Embalaje deseguridad" {
+    residuosRadioactivos.cambiarPeso(30)
+    embalajeDeSeguridad.cambiarObjetoEmbalado(residuosRadioactivos)
+    assert.equals(30, embalajeDeSeguridad.peso())
+    assert.equals(100, embalajeDeSeguridad.peligrosidad())
+  }
 }
